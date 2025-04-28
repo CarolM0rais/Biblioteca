@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<title>Reserva</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <!-- Navbar -->
+</nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Tabela de Reservas</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Leitor</th>
+                <th scope="col">Livro</th>
+                <th scope="col">Data da Reserva</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas %}
+            <tr>
+                <td>{{ reserva.leitor }}</td>
+                <td>{{ reserva.livro }}</td>
+                <td>{{ reserva.data_reserva }}</td>
+                <td>{{ reserva.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
