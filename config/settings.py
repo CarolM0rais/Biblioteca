@@ -1,6 +1,9 @@
 import os
 
 from pathlib import Path
+import os
+# Messages
+from django.contrib.messages import constants as messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,32 +36,25 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
-{
-'BACKEND':
-'django.template.backends.django.DjangoTemplates',
-    'DIRS': [
-            os.path.join(BASE_DIR, 'app/templates'),
-],
-'APP_DIRS': True,
-'OPTIONS': {
-'context_processors': [
-'django.template.context_processors.debug',
-'django.template.context_processors.request',
-'django.contrib.auth.context_processors.auth',
-'django.contrib.messages.context_processors.messages',
-],
-},
-},
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'app' / 'templates'],  # <- aqui está o caminho certo
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
 ]
 WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Biblioteca_n',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
 }
 }
 AUTH_PASSWORD_VALIDATORS = [

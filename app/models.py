@@ -31,6 +31,7 @@ verbose_name="Cidade da editora")
 class Leitor(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome do leitor")
     email = models.CharField(max_length=100, verbose_name="Email do leitor")
+    telefone = models.CharField(max_length=15, verbose_name="Telefone do leitor")
     cpf = models.CharField(max_length=11, unique=True,
     verbose_name="CPF do leitor")
     def __str__(self):
