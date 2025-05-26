@@ -68,8 +68,12 @@ class Livro(models.Model):
     editora = models.ForeignKey(Editora, on_delete=models.CASCADE)
     genero = models.ForeignKey(Genero, on_delete=models.CASCADE)
     preco = models.IntegerField()
-    data_pub = models.DateField()  # corrigido: data_pub
+    data_pub = models.DateField()
     status = models.BooleanField()
+
+    def __str__(self):
+        return self.nome
+
 
 class Reserva(models.Model):
     livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
@@ -78,3 +82,5 @@ class Reserva(models.Model):
     data_devolucao = models.DateField(null=True, blank=True)
     devolvido = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"{self.leitor} - {self.livro} ({self.data_reserva})"
