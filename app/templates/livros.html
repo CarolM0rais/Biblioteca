@@ -54,8 +54,8 @@
                 {% for livro in livros %}
                 <tr>
                     <td>{{ livro.nome }}</td>
-                    <td>{{ livro.autor }}</td>
-                    <td>{{ livro.editora }}</td>
+                    <td>{{ livro.autor.nome }}</td>
+                    <td>{{ livro.editora.nome }}</td>
                 </tr>
                 {% empty %}
                 <tr>
