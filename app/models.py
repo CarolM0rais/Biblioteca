@@ -63,31 +63,18 @@ class Genero(models.Model):
 
 
 class Livro(models.Model):
-    nome = models.CharField(max_length=100, verbose_name="Nome do livro")
-    autor = models.ForeignKey(Autor, on_delete=models.CASCADE, verbose_name="Autor do livro")
-    editora = models.ForeignKey(Editora, on_delete=models.CASCADE, verbose_name="Editora do livro")
-    genero = models.ForeignKey(Genero, on_delete=models.CASCADE, verbose_name="Gênero do livro")
-    preco = models.IntegerField(verbose_name="Preço do livro")
-    data_pub = models.DateField(verbose_name="Data de publicação do livro")  # corrigido: data_plub -> data_pub
-    status = models.BooleanField(verbose_name="Status do livro")
-
-    def __str__(self):
-        return f'{self.nome}, {self.autor}'
-
-    class Meta:
-        verbose_name = "Livro"
-        verbose_name_plural = "Livros"
+    nome = models.CharField(max_length=100)
+    autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
+    editora = models.ForeignKey(Editora, on_delete=models.CASCADE)
+    genero = models.ForeignKey(Genero, on_delete=models.CASCADE)
+    preco = models.IntegerField()
+    data_pub = models.DateField()  # corrigido: data_pub
+    status = models.BooleanField()
 
 class Reserva(models.Model):
-    livro = models.ForeignKey(Livro, on_delete=models.CASCADE, verbose_name="Livro reservado")
-    leitor = models.ForeignKey(Leitor, on_delete=models.CASCADE, verbose_name="Leitor que reservou")
-    data_reserva = models.DateField(verbose_name="Data da reserva")
-    data_devolucao = models.DateField(null=True, blank=True, verbose_name="Data de devolução")
-    devolvido = models.BooleanField(default=False, verbose_name="Devolvido?")
+    livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
+    leitor = models.ForeignKey(Leitor, on_delete=models.CASCADE)
+    data_reserva = models.DateField()
+    data_devolucao = models.DateField(null=True, blank=True)
+    devolvido = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f"Reserva: {self.livro.nome} para {self.leitor.nome}"
-
-    class Meta:
-        verbose_name = "Reserva"
-        verbose_name_plural = "Reservas"
