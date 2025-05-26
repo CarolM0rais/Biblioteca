@@ -77,3 +77,17 @@ class Livro(models.Model):
     class Meta:
         verbose_name = "Livro"
         verbose_name_plural = "Livros"
+
+class Reserva(models.Model):
+    livro = models.ForeignKey(Livro, on_delete=models.CASCADE, verbose_name="Livro reservado")
+    leitor = models.ForeignKey(Leitor, on_delete=models.CASCADE, verbose_name="Leitor que reservou")
+    data_reserva = models.DateField(verbose_name="Data da reserva")
+    data_devolucao = models.DateField(null=True, blank=True, verbose_name="Data de devolução")
+    devolvido = models.BooleanField(default=False, verbose_name="Devolvido?")
+
+    def __str__(self):
+        return f"Reserva: {self.livro.nome} para {self.leitor.nome}"
+
+    class Meta:
+        verbose_name = "Reserva"
+        verbose_name_plural = "Reservas"

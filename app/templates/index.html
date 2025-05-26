@@ -20,10 +20,13 @@
                     <a class="nav-link text-dark" href="{% url 'index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href= "{% url 'livros' %}" >Livros</a>
+                    <a class="nav-link text-dark" href="{% url 'livros' %}">Livros</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{% url 'cidade' %}">Cidade</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{% url 'reserva' %}">Reserva</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{% url 'autor' %}">Autor</a>
@@ -37,6 +40,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{% url 'leitor' %}">Leitor</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/admin/">Administração</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -45,11 +51,51 @@
         <div class="jumbotron text-center">
             <h1 class="display-4">Olá, é bom te ver por aqui</h1>
             <p class="lead">Esta é a página inicial da Biblioteca</p>
-            <p class="lead">Seja Bem Vindo(A)</p>
+            <p class="lead">Seja Bem Vindo(a)</p>
         </div>
+    
+        <h2 class="mb-4">Lista de Livros</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Editora</th>
+                    <th scope="col">Gênero</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Data Publicação</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for livro in livros %}
+                <tr>
+                    <td>{{ livro.nome }}</td>
+                    <td>{{ livro.autor }}</td>
+                    <td>{{ livro.editora }}</td>
+                    <td>
+                        {% for genero in livro.genero.all %}
+                            {{ genero.nome }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ livro.preco }}</td>
+                    <td>{{ livro.data_plub }}</td>
+                    <td>{{ livro.status }}</td>
+                    <td>
+                        <a href="{% url 'delete' livro.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center">Nenhum livro cadastrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+    
 
-   
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
